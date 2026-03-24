@@ -9,14 +9,14 @@ const ALPHABET_EMOJIS = {
 
 const THEME_CONFIG = {
   dark: {
-    attibute: () => {
+    attribute: () => {
       document.documentElement.removeAttribute('data-theme');
     },
     textContent: '🌙',
     localStorage: 'dark'
   },
   light: {
-    attibute: () => {
+    attribute: () => {
       document.documentElement.setAttribute('data-theme', 'light');
     },
     textContent: '☀️',
@@ -38,7 +38,7 @@ function initThemeToggle() {
     const theme = isLight ? 'dark' : 'light';
     const themeConfig = THEME_CONFIG[theme];
 
-    themeConfig.attibute();
+    themeConfig.attribute();
     toggle.textContent = themeConfig.textContent;
     localStorage.setItem('theme', themeConfig.localStorage);
   });
@@ -59,6 +59,7 @@ function init() {
 
 function renderLegend() {
   const grid = document.getElementById('legend-grid');
+
   for (const [letter, emoji] of Object.entries(ALPHABET_EMOJIS)) {
     const item = document.createElement('div');
     item.className = 'legend-item';
@@ -66,6 +67,7 @@ function renderLegend() {
       <span class="emoji">${emoji}</span>
       <span class="letter">${letter.toUpperCase()}</span>
     `;
+
     grid.appendChild(item);
   }
 }
@@ -79,9 +81,10 @@ function translate() {
   if (!phrase.trim()) return;
 
   const result = document.getElementById('result');
+  result.hidden = false;
+
   const output = document.getElementById('emoji-output');
   output.innerHTML = '';
-  result.hidden = false;
 
   const words = phrase.split(' ');
 
@@ -90,10 +93,10 @@ function translate() {
     wordGroup.className = 'word-group';
 
     for (const char of word) {
+      const emoji = ALPHABET_EMOJIS[char];
       const cell = document.createElement('div');
       cell.className = 'emoji-cell';
 
-      const emoji = ALPHABET_EMOJIS[char];
       if (emoji) {
         cell.innerHTML = `
           <span class="emoji">${emoji}</span>
@@ -105,6 +108,7 @@ function translate() {
           <div class="letter-box"></div>
         `;
       }
+
       wordGroup.appendChild(cell);
     }
 
