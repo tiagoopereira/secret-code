@@ -7,8 +7,46 @@ const ALPHABET_EMOJIS = {
   z: '🎭'
 };
 
+const THEME_CONFIG = {
+  dark: {
+    attibute: () => {
+      document.documentElement.removeAttribute('data-theme');
+    },
+    textContent: '🌙',
+    localStorage: 'dark'
+  },
+  light: {
+    attibute: () => {
+      document.documentElement.setAttribute('data-theme', 'light');
+    },
+    textContent: '☀️',
+    localStorage: 'light'
+  }
+}
+
+function initThemeToggle() {
+  const toggle = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('theme');
+
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    toggle.textContent = '☀️';
+  }
+
+  toggle.addEventListener('click', () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const theme = isLight ? 'dark' : 'light';
+    const themeConfig = THEME_CONFIG[theme];
+
+    themeConfig.attibute();
+    toggle.textContent = themeConfig.textContent;
+    localStorage.setItem('theme', themeConfig.localStorage);
+  });
+}
+
 function init() {
   renderLegend();
+  initThemeToggle();
 
   const input = document.getElementById('phrase-input');
   const btn = document.getElementById('translate-btn');

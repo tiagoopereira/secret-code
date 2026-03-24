@@ -9,23 +9,25 @@
 </head>
 
 <body>
+	<button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">🌙</button>
+
 	<div class="container">
-		<h1>Codigo Secreto</h1>
-		<p class="subtitle">Traduza a mensagem trocando os simbolos por letras!</p>
+		<h1>Código Secreto</h1>
+		<p class="subtitle">Traduza a mensagem trocando os símbolos por letras!</p>
 
 		<div class="legend">
-			<h2>Tabela de Simbolos</h2>
+			<h2>Tabela de Símbolos</h2>
 			<div id="legend-grid" class="legend-grid"></div>
 		</div>
 
 		<div class="input-section">
 			<label for="phrase-input">Digite sua frase:</label>
-			<input type="text" id="phrase-input" placeholder="Ex: ola mundo" autocomplete="off">
+			<input type="text" id="phrase-input" placeholder="Ex: olá mundo" autocomplete="off">
 			<button id="translate-btn">Traduzir</button>
 		</div>
 
 		<div id="result" class="result" hidden>
-			<h2>Mensagem em Codigo:</h2>
+			<h2>Mensagem em Código:</h2>
 			<div id="emoji-output" class="emoji-output"></div>
 		</div>
 	</div>
