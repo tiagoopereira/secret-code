@@ -29,6 +29,7 @@
 html {
   background: var(--bg);
   transition: background 0.3s;
+  overflow-x: hidden;
 }
 
 body {
@@ -38,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 1rem 2rem;
+  padding: 1rem 0 2rem;
   transition: background 0.3s, color 0.3s;
 }
 
@@ -46,6 +47,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  padding-right: 1rem;
   margin-bottom: 0.5rem;
 }
 
@@ -68,8 +70,9 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 850px;
   width: 100%;
+  padding: 0 1rem;
 }
 
 h1 {
@@ -79,12 +82,41 @@ h1 {
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 4px;
+  word-break: break-word;
 }
 
 .subtitle {
   text-align: center;
   color: var(--subtitle);
   margin-bottom: 2rem;
+}
+
+.alphabet-selector {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.alphabet-btn {
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.alphabet-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.alphabet-btn:hover:not(.active) {
+  background: var(--item-bg);
 }
 
 h2 {
@@ -146,6 +178,7 @@ h2 {
   padding: 1.5rem;
   margin-bottom: 2rem;
   transition: background 0.3s;
+  overflow-x: auto;
 }
 
 .emoji-output {
@@ -160,10 +193,15 @@ h2 {
   flex-direction: column;
   align-items: center;
   min-width: 48px;
+  margin-bottom: 1rem;
 }
 
 .emoji-cell .emoji {
   font-size: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .emoji-cell .letter-box {
@@ -182,7 +220,7 @@ h2 {
   flex-wrap: wrap;
   gap: 0.25rem;
   margin-right: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .legend {
@@ -226,13 +264,19 @@ h2 {
 @media (max-width: 549px) {
   h1 {
     font-size: 1.8rem;
+    letter-spacing: 2px;
   }
 
   .legend-grid {
     grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
   }
 
+  .emoji-cell {
+    min-width: 36px;
+  }
+
   .emoji-cell .emoji {
     font-size: 1.5rem;
+    height: 1.5rem;
   }
 }

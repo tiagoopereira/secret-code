@@ -1,10 +1,20 @@
-const ALPHABET_EMOJIS = {
-  a: '🌟', b: '🔥', c: '🌙', d: '⚡', e: '🎵',
-  f: '🍀', g: '🌈', h: '❄️', i: '🔑', j: '🎯',
-  k: '🧩', l: '💎', m: '🦋', n: '🌻', o: '🍎',
-  p: '🐾', q: '👑', r: '🚀', s: '☀️', t: '🌊',
-  u: '🎈', v: '🔔', w: '🌸', x: '💀', y: '🧲',
-  z: '🎭'
+const ALPHABETS = {
+  simple: {
+    a: '🌟', b: '🔥', c: '🌙', d: '⚡', e: '🎵',
+    f: '🍀', g: '🌈', h: '❄️', i: '🔑', j: '🎯',
+    k: '🧩', l: '💎', m: '🦋', n: '🌻', o: '🍎',
+    p: '🐾', q: '👑', r: '🚀', s: '☀️', t: '🌊',
+    u: '🎈', v: '🔔', w: '🌸', x: '💀', y: '🧲',
+    z: '🎭'
+  },
+  complex: {
+    a: '◐', b: '◑', c: '◒', d: '◓', e: '●',
+    f: '○', g: '◉', h: '◎', i: '⊕', j: '⊖',
+    k: '⊗', l: '⊘', m: '⊙', n: '⊚', o: '◔',
+    p: '◕', q: '◍', r: '◌', s: '◈', t: '◇',
+    u: '◆', v: '▲', w: '△', x: '▼', y: '▽',
+    z: '⊛'
+  }
 };
 
 const THEME_CONFIG = {
@@ -23,6 +33,8 @@ const THEME_CONFIG = {
     localStorage: 'light'
   }
 }
+
+let currentAlphabet = 'simple';
 
 function initThemeToggle() {
   const toggle = document.getElementById('theme-toggle');
@@ -44,9 +56,24 @@ function initThemeToggle() {
   });
 }
 
+function initAlphabetSelector() {
+  document.querySelectorAll('.alphabet-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelector('.alphabet-btn.active').classList.remove('active');
+      btn.classList.add('active');
+      currentAlphabet = btn.dataset.alphabet;
+      renderLegend();
+
+      const result = document.getElementById('result');
+      if (!result.hidden) translate();
+    });
+  });
+}
+
 function init() {
   renderLegend();
   initThemeToggle();
+  initAlphabetSelector();
 
   const input = document.getElementById('phrase-input');
   const btn = document.getElementById('translate-btn');
@@ -59,8 +86,9 @@ function init() {
 
 function renderLegend() {
   const grid = document.getElementById('legend-grid');
+  grid.innerHTML = '';
 
-  for (const [letter, emoji] of Object.entries(ALPHABET_EMOJIS)) {
+  for (const [letter, emoji] of Object.entries(ALPHABETS[currentAlphabet])) {
     const item = document.createElement('div');
     item.className = 'legend-item';
     item.innerHTML = `
@@ -93,7 +121,7 @@ function translate() {
     wordGroup.className = 'word-group';
 
     for (const char of word) {
-      const emoji = ALPHABET_EMOJIS[char];
+      const emoji = ALPHABETS[currentAlphabet][char];
       const cell = document.createElement('div');
       cell.className = 'emoji-cell';
 
