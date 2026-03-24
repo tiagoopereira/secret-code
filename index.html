@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Codigo Secreto</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<h1>Codigo Secreto</h1>
+		<p class="subtitle">Traduza a mensagem trocando os simbolos por letras!</p>
+
+		<div class="legend">
+			<h2>Tabela de Simbolos</h2>
+			<div id="legend-grid" class="legend-grid"></div>
+		</div>
+
+		<div class="input-section">
+			<label for="phrase-input">Digite sua frase:</label>
+			<input type="text" id="phrase-input" placeholder="Ex: ola mundo" autocomplete="off">
+			<button id="translate-btn">Traduzir</button>
+		</div>
+
+		<div id="result" class="result" hidden>
+			<h2>Mensagem em Codigo:</h2>
+			<div id="emoji-output" class="emoji-output"></div>
+		</div>
+	</div>
+
+	<script src="index.js"></script>
+</body>
+
+</html>
